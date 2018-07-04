@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.hap.trip.SplashActivity">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.hap.trip.ui.SplashActivity">
 
-    <TextView
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/splash_icon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="16dp"
+        tools:background="@color/colorAccent" />
+
+    <android.support.v7.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
 
-</RelativeLayout>
+</LinearLayout>

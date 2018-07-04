@@ -1,4 +1,35 @@
 <resources>
     <string name="app_name">Trip</string>
-    <string name="title_activity_maps">Map</string>
+
+    <string name="error_header_text">Content unavailable</string>
+    <string name="error_sub_header_text">Something happened while trying to load the articles, try again later</string>
+    <string name="error_snack_bar">Something went wrong!</string>
+    <string name="empty_header_text">Oh, seems that there\'s no articles for now!</string>
+
+    <string name="flight_tab_title_round_trip">Round Trip</string>
+    <string name="flight_tab_title_one_way_trip">One-way</string>
+    <string name="flight_tab_title_airports">Airports</string>
+
+    <string name="flight_origin">Origin</string>
+    <string name="flight_origin_hint">Departing from</string>
+    <string name="flight_origin_error">Select origin</string>
+
+    <string name="flight_destination">Destination</string>
+    <string name="flight_destination_hint">Flying to</string>
+    <string name="flight_destination_error">Select destination</string>
+
+    <string name="flight_depart">Depart</string>
+    <string name="flight_depart_error">Select depart date</string>
+
+    <string name="flight_returning">Returning</string>
+    <string name="flight_returning_error">Select return date</string>
+
+    <string name="flight_passenger">Passengers</string>
+    <string name="flight_passenger_hint">Select passengers</string>
+    <string name="flight_passenger_error">Select passengers</string>
+    <string name="flight_passenger_format">%d adult - %d children - %d infant</string>
+
+    <string name="flight_continue">Continue</string>
+    <string name="flight_select_date">Select date</string>
+
 </resources>
