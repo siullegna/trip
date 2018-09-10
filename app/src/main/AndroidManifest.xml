@@ -3,6 +3,9 @@
     package="com.hap.trip">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".TripApplication"
@@ -19,16 +22,60 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.flight.FlightActivity" />
-
         <activity
-            android:name=".ui.airport.AirportSearchActivity"
+            android:name=".ui.flight.FlightActivity"
+            android:label="@string/select_flight" />
+        <activity
+            android:name=".ui.airport.OriginAirportActivity"
+            android:label="@string/flight_origin"
             android:windowSoftInputMode="adjustPan" />
-
+        <activity
+            android:name=".ui.airport.DestinationAirportActivity"
+            android:label="@string/flight_destination"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.date.DatePickerActivity" />
+        <activity
+            android:name=".ui.passenger.SelectPassengerActivity"
+            android:label="@string/flight_passenger" />
+        <activity android:name=".ui.result.FlightResultActivity" />
+        <activity
+            android:name=".ui.result.FlightFilterActivity"
+            android:label="@string/flight_filter" />
+        <activity android:name=".ui.detail.FlightDetailActivity" />
+        <activity
+            android:name=".ui.detail.MyFlightsActivity"
+            android:label="@string/my_flights" />
 
-        <activity android:name=".ui.passenger.SelectPassengerActivity" />
+        <receiver android:name=".ui.widget.TripWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/trip_widget_info" />
+        </receiver>
+        <service
+            android:name=".service.TripWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <provider
+            android:name=".persistence.sqlite.provider.FlightProvider"
+            android:authorities="@string/content_authority"
+            android:enabled="true"
+            android:exported="true" />
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
     </application>
 
 </manifest>

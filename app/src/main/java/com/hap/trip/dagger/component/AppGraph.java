@@ -1,8 +1,6 @@
 package com.hap.trip.dagger.component;
 
-import com.hap.trip.adapter.FlightPagerAdapter;
-import com.hap.trip.ui.base.BaseAppActivity;
-import com.hap.trip.ui.base.BaseAppFragment;
+import com.hap.trip.adapter.pager.BasePagerAdapter;
 import com.hap.trip.viewmodel.TripViewModel;
 
 /**
@@ -10,7 +8,7 @@ import com.hap.trip.viewmodel.TripViewModel;
  */
 
 public interface AppGraph {
-    void inject(final FlightPagerAdapter flightPagerAdapter);
+    void inject(final BasePagerAdapter basePagerAdapter);
 
     void inject(final TripViewModel tripViewModel);
 }

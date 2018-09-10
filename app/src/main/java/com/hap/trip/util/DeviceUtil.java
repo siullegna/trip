@@ -17,4 +17,11 @@ public class DeviceUtil {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+    public static void showKeyboard(@Nonnull final View view, final Context context) {
+        final InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInputFromInputMethod(view.getWindowToken(), 0);
+        }
+    }
 }

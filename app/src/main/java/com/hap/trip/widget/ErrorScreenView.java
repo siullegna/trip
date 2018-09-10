@@ -2,17 +2,27 @@ package com.hap.trip.widget;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.hap.trip.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by luis on 6/18/18.
  */
 
 public class ErrorScreenView extends LinearLayout {
+    @BindView(R.id.error_header)
+    AppCompatTextView errorHeader;
+    @BindView(R.id.error_subheader)
+    AppCompatTextView errorSubHeader;
+
     public ErrorScreenView(Context context) {
         this(context, null);
     }
@@ -28,10 +38,23 @@ public class ErrorScreenView extends LinearLayout {
         if (inflater == null) {
             return;
         }
-        inflater.inflate(R.layout.error_screen_view, this);
+        final View view = inflater.inflate(R.layout.error_screen_view, this);
+        ButterKnife.bind(this, view);
+    }
 
-        final PhotoDraweeView photoDraweeView = findViewById(R.id.error_icon);
+    public void setInfoHeader(final String header) {
+        errorHeader.setText(header);
+    }
 
-        photoDraweeView.setupImage(R.drawable.ic_could_error);
+    public void setInfoHeader(final int headerId) {
+        errorHeader.setText(headerId);
+    }
+
+    public void setInfoSubHeader(final String subHeader) {
+        errorSubHeader.setText(subHeader);
+    }
+
+    public void setInfoSubHeader(final int subHeaderId) {
+        errorSubHeader.setText(subHeaderId);
     }
 }

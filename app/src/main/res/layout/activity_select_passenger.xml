@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -25,19 +25,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="@dimen/select_passenger_container_padding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            tools:text="Select the passengers for the trip" />
+            android:layout_marginBottom="@dimen/select_passenger_message_margin"
+            android:text="@string/select_passenger_description" />
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:padding="@dimen/select_passenger_card_padding">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,16 +45,25 @@
                 android:orientation="vertical">
 
                 <com.hap.trip.widget.PassengerPickerViewGroup
+                    android:id="@+id/adult_picker"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    custom:ageRange="@string/select_passenger_adult_age"
+                    custom:passengerType="@string/select_passenger_adult" />
 
                 <com.hap.trip.widget.PassengerPickerViewGroup
+                    android:id="@+id/children_picker"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    custom:ageRange="@string/select_passenger_children_age"
+                    custom:passengerType="@string/select_passenger_children" />
 
                 <com.hap.trip.widget.PassengerPickerViewGroup
+                    android:id="@+id/infant_picker"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    custom:ageRange="@string/select_passenger_infants_age"
+                    custom:passengerType="@string/select_passenger_infants" />
 
             </LinearLayout>
 
@@ -66,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/select_passenger_button_margin"
             android:text="@string/flight_continue" />
 
     </LinearLayout>

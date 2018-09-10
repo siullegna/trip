@@ -22,9 +22,9 @@
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@id/passenger_picker_view"
         android:layout_toStartOf="@id/passenger_picker_view"
-        android:textSize="16sp"
+        android:textSize="@dimen/passenger_picker_text_size"
         android:textStyle="bold"
-        tools:text="Adults" />
+        tools:text="@string/mock_adult" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/age"
@@ -35,7 +35,7 @@
         android:layout_below="@id/passenger"
         android:layout_toLeftOf="@id/passenger_picker_view"
         android:layout_toStartOf="@id/passenger_picker_view"
-        android:textSize="12sp"
-        tools:text="> 12 years" />
+        android:textSize="@dimen/passenger_picker_age_text_size"
+        tools:text="@string/mock_age" />
 
 </RelativeLayout>

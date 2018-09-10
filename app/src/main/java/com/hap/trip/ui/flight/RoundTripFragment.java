@@ -9,10 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hap.trip.Config;
 import com.hap.trip.R;
 import com.hap.trip.ui.date.DatePickerActivity;
 import com.hap.trip.util.IntentFactory;
 import com.hap.trip.widget.InputTextView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by luis on 6/23/18.
@@ -25,19 +29,15 @@ public class RoundTripFragment extends BaseTripFragment {
         return new RoundTripFragment();
     }
 
+    @BindView(R.id.input_returning)
     protected InputTextView inputReturning;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_trip, container, false);
+        ButterKnife.bind(this, view);
 
-        inputReturning = view.findViewById(R.id.input_returning);
         inputReturning.setVisibility(View.VISIBLE);
         inputReturning.setEnabled(false);
         setupViews(view);
@@ -81,6 +81,13 @@ public class RoundTripFragment extends BaseTripFragment {
     }
 
     @Override
+    protected void resetValues() {
+        super.resetValues();
+
+        inputReturning.resetValues();
+    }
+
+    @Override
     protected boolean isValid() {
         boolean isValid = super.isValid();
 
@@ -90,5 +97,10 @@ public class RoundTripFragment extends BaseTripFragment {
         }
 
         return isValid;
+    }
+
+    @Override
+    public Long getReturningDate() {
+        return inputReturning.getDate();
     }
 }

@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Trip</string>
+    <string name="select_flight">Search Flights</string>
+    <string name="content_authority">com.hap.trip</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
+    <string name="error_airport_list">Cannot load the nearest airports!</string>
     <string name="error_header_text">Content unavailable</string>
     <string name="error_sub_header_text">Something happened while trying to load the articles, try again later</string>
     <string name="error_snack_bar">Something went wrong!</string>
@@ -9,6 +13,9 @@
     <string name="flight_tab_title_round_trip">Round Trip</string>
     <string name="flight_tab_title_one_way_trip">One-way</string>
     <string name="flight_tab_title_airports">Airports</string>
+
+    <!-- this will give us the format to set the airportCode: Airport Name (AN) -->
+    <string name="flight_format">%s (%s)</string>
 
     <string name="flight_origin">Origin</string>
     <string name="flight_origin_hint">Departing from</string>
@@ -31,5 +38,62 @@
 
     <string name="flight_continue">Continue</string>
     <string name="flight_select_date">Select date</string>
+
+    <string name="select_passenger_description">Select the passengers for the trip</string>
+    <string name="select_passenger_adult">Adult</string>
+    <string name="select_passenger_adult_age">&gt; 12 years</string>
+    <string name="select_passenger_children">Children</string>
+    <string name="select_passenger_children_age">&gt; 2&#8212;11 years</string>
+    <string name="select_passenger_infants">Infants</string>
+    <string name="select_passenger_infants_age">&lt; 2 years</string>
+    <string name="select_passenger_plus">+</string>
+    <string name="select_passenger_minus">-</string>
+
+    <string name="search_airport_list">List</string>
+    <string name="search_airport_map">Map</string>
+    <string name="search_airport_current_location">Current location</string>
+    <string name="search_airport_current_location_code">CL-Code</string>
+    <string name="search_airport_error_header">No permission</string>
+    <string name="search_airport_error_info">You need to grant permissions to use the location</string>
+
+    <string name="select_flight_type">Select flight type</string>
+    <string name="select_airport_one_way">One way</string>
+    <string name="select_airport_round_trip">Round trip</string>
+    <string name="dialog_cancel">Cancel</string>
+
+    <string name="flight_result">Select flight to %s</string>
+    <string name="flight_result_date_format">%s, %s</string>
+    <plurals name="flight_result_traveler">
+        <item quantity="one">%d traveler</item>
+        <item quantity="other">%d travelers</item>
+    </plurals>
+    <string name="flight_result_error">Oops, something went wrong with the search!</string>
+    <string name="flight_result_number">Number of results</string>
+    <string name="flight_result_price_format">$%s</string>
+    <string name="flight_result_time_format">%s:%s</string>
+    <string name="flight_result_time_format_1">%s - %s</string>
+    <string name="flight_result_time_format_2">%s %s</string>
+    <string name="flight_result_time_format_3">"%02dh %02dm</string>
+    <string name="flight_result_nonstop">(Nonstop)</string>
+    <plurals name="flight_result_stops">
+        <item quantity="one">(%d stop)</item>
+        <item quantity="other">(%d stops)</item>
+    </plurals>
+    <string name="flight_result_aircraft_format">, %s</string>
+    <string name="flight_result_type_format">&#160;+ %s</string>
+
+    <string name="flight_filter">Sort &amp; Filter</string>
+    <string name="flight_done">Done</string>
+
+    <string name="flight_detail">Flight to %s</string>
+    <string name="flight_save">Save Flight</string>
+    <string name="flight_depart_from">Departing from %s\nTotal duration %s\nTotal price $%s</string>
+    <string name="flight_route_format">&#160;> %s</string>
+    <string name="flight_return_from">Returning from %s\nTotal duration %s</string>
+
+    <string name="my_flights">My Flights</string>
+    <string name="flight_detail_number">Flight number: %s</string>
+    <string name="widget_empty_header">Oops!</string>
+    <string name="widget_empty_sub_header">You don\'t have flights ye!</string>
 
 </resources>

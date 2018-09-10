@@ -12,21 +12,29 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.hap.trip.R;
-import com.hap.trip.util.StringHelper;
+import com.hap.trip.util.DateUtil;
+import com.hap.trip.util.FlightUtil;
 
 import javax.annotation.Nonnull;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by luis on 6/25/18.
  */
 
 public class InputTextView extends LinearLayout {
-    private final AppCompatTextView inputHint;
-    private final AppCompatTextView inputMessage;
-    private final View inputDivider;
+    @BindView(R.id.input_hint)
+    AppCompatTextView inputHint;
+    @BindView(R.id.input_message)
+    AppCompatTextView inputMessage;
+    @BindView(R.id.input_divider)
+    View inputDivider;
 
     private String hint;
     private String mainHint;
+    private int colorText;
     private int colorError;
     private int colorNormal;
     private InputTextType inputTextType;
@@ -50,16 +58,10 @@ public class InputTextView extends LinearLayout {
 
         final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (inflater == null) {
-            inputHint = null;
-            inputMessage = null;
-            inputDivider = null;
             return;
         }
-        inflater.inflate(R.layout.input_text_view, this);
-
-        inputHint = findViewById(R.id.input_hint);
-        inputMessage = findViewById(R.id.input_message);
-        inputDivider = findViewById(R.id.input_divider);
+        final View view = inflater.inflate(R.layout.input_text_view, this);
+        ButterKnife.bind(this, view);
 
         final TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.InputTextViewAttrs, 0, 0);
         if (typedArray != null) {
@@ -71,6 +73,7 @@ public class InputTextView extends LinearLayout {
     private void setupAttrs(@Nonnull final TypedArray typedArray) {
         hint = typedArray.getString(R.styleable.InputTextViewAttrs_hint);
         mainHint = typedArray.getString(R.styleable.InputTextViewAttrs_mainHint);
+        colorText = typedArray.getColor(R.styleable.InputTextViewAttrs_colorText, ContextCompat.getColor(getContext(), R.color.colorPrimaryText));
         colorError = typedArray.getColor(R.styleable.InputTextViewAttrs_colorInputError, ContextCompat.getColor(getContext(), R.color.colorDividerError));
         colorNormal = typedArray.getColor(R.styleable.InputTextViewAttrs_colorInputNormal, ContextCompat.getColor(getContext(), R.color.colorDivider));
         final int inputType = typedArray.getInteger(R.styleable.InputTextViewAttrs_inputType, InputTextType.TEXT.type);
@@ -109,6 +112,7 @@ public class InputTextView extends LinearLayout {
     public void setText(final String text) {
         this.text = text;
         inputMessage.setText(text);
+        removeError();
     }
 
     public String getText() {
@@ -117,7 +121,8 @@ public class InputTextView extends LinearLayout {
 
     public void setDate(final long date) {
         this.date = date;
-        inputMessage.setText(StringHelper.getFormattedDate(date));
+        inputMessage.setText(DateUtil.getSelectedDateFormatted(date));
+        removeError();
     }
 
     public long getDate() {
@@ -132,7 +137,8 @@ public class InputTextView extends LinearLayout {
         this.adultCount = adultCount;
         this.childrenCount = childrenCount;
         this.infantCount = infantCount;
-        inputMessage.setText(StringHelper.getFormattedPassenger(getResources(), adultCount, childrenCount, infantCount));
+        inputMessage.setText(FlightUtil.getFormattedPassenger(getResources(), adultCount, childrenCount, infantCount));
+        removeError();
     }
 
     public int getAdultCount() {
@@ -140,10 +146,16 @@ public class InputTextView extends LinearLayout {
     }
 
     public int getChildrenCount() {
+        if (childrenCount < 0) {
+            return 0;
+        }
         return childrenCount;
     }
 
     public int getInfantCount() {
+        if (infantCount < 0) {
+            return 0;
+        }
         return infantCount;
     }
 
@@ -151,6 +163,11 @@ public class InputTextView extends LinearLayout {
         inputMessage.setText(error);
         inputMessage.setTextColor(colorError);
         inputDivider.setBackgroundColor(colorError);
+    }
+
+    private void removeError() {
+        inputMessage.setTextColor(colorText);
+        inputDivider.setBackgroundColor(colorNormal);
     }
 
     private enum InputTextType {

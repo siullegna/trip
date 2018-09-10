@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="divider_height">1dp</dimen>
     <dimen name="error_screen_horizontal_padding">72dp</dimen>
     <dimen name="error_screen_vertical_padding">16dp</dimen>
     <dimen name="error_icon_size">200dp</dimen>
@@ -16,5 +17,44 @@
     <dimen name="appbar_elevation">4dp</dimen>
     <dimen name="card_view_elevation">4dp</dimen>
     <dimen name="card_view_radius">3dp</dimen>
+    <dimen name="flight_detail_card_margin">8dp</dimen>
+    <dimen name="flight_detail_card_padding">16dp</dimen>
+    <dimen name="flight_detail_card_view_height">0dp</dimen>
+    <dimen name="flight_detail_button_margin">16dp</dimen>
+    <dimen name="flight_filter_card_padding">8dp</dimen>
+    <dimen name="flight_filter_container_padding">8dp</dimen>
+    <dimen name="flight_filter_icon_size">36dp</dimen>
+    <dimen name="my_flight_card_padding">16dp</dimen>
+    <dimen name="flight_result_card_padding">8dp</dimen>
+    <dimen name="flight_result_container_padding">8dp</dimen>
+    <dimen name="flight_result_list_margin">8dp</dimen>
+    <dimen name="select_passenger_container_padding">16dp</dimen>
+    <dimen name="select_passenger_message_margin">8dp</dimen>
+    <dimen name="select_passenger_card_padding">8dp</dimen>
+    <dimen name="select_passenger_button_margin">16dp</dimen>
+    <dimen name="splash_icon_size">120dp</dimen>
+    <dimen name="splash_icon_margin">16dp</dimen>
+    <dimen name="splash_message_text_size">48sp</dimen>
+    <dimen name="flight_card_container_padding">16dp</dimen>
+    <dimen name="flight_detail_card_returning_margin">8dp</dimen>
+    <dimen name="flight_type_padding">16dp</dimen>
+    <dimen name="airport_list_search_padding_end">0dp</dimen>
+    <dimen name="airport_list_search_padding_start">16dp</dimen>
+    <dimen name="airport_list_search_drawable_padding_start">16dp</dimen>
+    <dimen name="trip_container_padding">16dp</dimen>
+    <dimen name="trip_card_margin">8dp</dimen>
+    <dimen name="trip_input_height">0dp</dimen>
+    <dimen name="trip_button_margin">16dp</dimen>
+    <dimen name="input_hint_size">12sp</dimen>
+    <dimen name="input_message_size">18sp</dimen>
+    <dimen name="input_message_margin">8dp</dimen>
+    <dimen name="input_divider_margin">4dp</dimen>
+    <dimen name="flight_search_icon_margin">16dp</dimen>
+    <dimen name="passenger_picker_button_width">0dp</dimen>
+    <dimen name="passenger_picker_count_width">0dp</dimen>
+    <dimen name="passenger_picker_text_size">16sp</dimen>
+    <dimen name="passenger_picker_age_text_size">12sp</dimen>
+    <dimen name="trip_widget_header_padding">16dp</dimen>
+    <dimen name="trip_widget_header_size">16sp</dimen>
 
 </resources>

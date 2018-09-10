@@ -4,14 +4,12 @@ import android.app.Application;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
-import com.hap.trip.adapter.FlightPagerAdapter;
+import com.hap.trip.adapter.pager.BasePagerAdapter;
 import com.hap.trip.dagger.component.AppGraph;
 import com.hap.trip.dagger.component.DaggerTripAppComponent;
 import com.hap.trip.dagger.component.TripAppComponent;
 import com.hap.trip.dagger.module.ContextModule;
 import com.hap.trip.dagger.module.NetworkModule;
-import com.hap.trip.ui.base.BaseAppActivity;
-import com.hap.trip.ui.base.BaseAppFragment;
 import com.hap.trip.viewmodel.TripViewModel;
 
 /**
@@ -45,8 +43,8 @@ public class TripApplication extends Application implements AppGraph {
     }
 
     @Override
-    public void inject(FlightPagerAdapter flightPagerAdapter) {
-        tripAppComponent.inject(flightPagerAdapter);
+    public void inject(BasePagerAdapter basePagerAdapter) {
+        tripAppComponent.inject(basePagerAdapter);
     }
 
     @Override

@@ -11,22 +11,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorAccent"
-        android:textSize="12sp" />
+        android:textSize="@dimen/input_hint_size" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/input_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/input_message_margin"
         android:maxLines="1"
         android:textColor="@color/colorPrimaryText"
-        android:textSize="16sp" />
+        android:textSize="@dimen/input_message_size" />
 
     <View
         android:id="@+id/input_divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginTop="@dimen/input_divider_margin"
         android:background="@color/colorDivider" />
 
 </LinearLayout>

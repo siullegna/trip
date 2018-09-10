@@ -1,12 +1,22 @@
 package com.hap.trip.ui.flight;
 
+import android.arch.lifecycle.Observer;
+import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.Toast;
 
 import com.hap.trip.R;
+import com.hap.trip.model.flight.FlightItemResponse;
+import com.hap.trip.model.location.LocationAirportItem;
+import com.hap.trip.model.search.SearchFlightItem;
+import com.hap.trip.ui.airport.BaseAirportActivity;
 import com.hap.trip.ui.base.BaseAppFragment;
 import com.hap.trip.ui.date.DatePickerActivity;
+import com.hap.trip.ui.passenger.SelectPassengerActivity;
+import com.hap.trip.util.FlightUtil;
 import com.hap.trip.util.IntentFactory;
 import com.hap.trip.widget.InputTextView;
 
@@ -26,6 +36,11 @@ public abstract class BaseTripFragment extends BaseAppFragment {
     protected InputTextView inputDepart;
     protected InputTextView inputPassengers;
     protected AppCompatButton btnContinue;
+
+    protected LocationAirportItem origin;
+    protected LocationAirportItem destination;
+
+    protected OnSearchFlightEvent onSearchFlightEvent;
 
     protected boolean isValid() {
         boolean isValid = true;
@@ -54,13 +69,32 @@ public abstract class BaseTripFragment extends BaseAppFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (context instanceof OnSearchFlightEvent) {
+            onSearchFlightEvent = (OnSearchFlightEvent) context;
+        } else {
+            throw new RuntimeException("Parent activity must implement {OnSearchFlightEvent}");
+        }
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_ORIGIN_KEY:
-
+                if (resultCode == RESULT_OK) {
+                    origin = data.getParcelableExtra(BaseAirportActivity.ARG_SELECTED_FLIGHT_KEY);
+                    inputOrigin.resetValues();
+                    inputOrigin.setText(getString(R.string.flight_format, origin.getAirportName(), origin.getAirportCode()));
+                }
                 break;
             case REQUEST_DESTINATION_KEY:
-
+                if (resultCode == RESULT_OK) {
+                    destination = data.getParcelableExtra(BaseAirportActivity.ARG_SELECTED_FLIGHT_KEY);
+                    inputDestination.resetValues();
+                    inputDestination.setText(getString(R.string.flight_format, destination.getAirportName(), destination.getAirportCode()));
+                }
                 break;
             case REQUEST_DEPART_KEY:
                 if (resultCode == RESULT_OK) {
@@ -70,7 +104,13 @@ public abstract class BaseTripFragment extends BaseAppFragment {
                 }
                 break;
             case REQUEST_PASSENGERS_KEY:
+                if (resultCode == RESULT_OK) {
+                    final int adultCount = data.getIntExtra(SelectPassengerActivity.ARG_ADULT_KEY, 1);
+                    final int childrenCount = data.getIntExtra(SelectPassengerActivity.ARG_CHILDREN_KEY, 1);
+                    final int infantCount = data.getIntExtra(SelectPassengerActivity.ARG_INFANT_KEY, 1);
 
+                    inputPassengers.setPassengers(adultCount, childrenCount, infantCount);
+                }
                 break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);
@@ -82,7 +122,7 @@ public abstract class BaseTripFragment extends BaseAppFragment {
         inputOrigin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent airportSearchIntent = IntentFactory.getAirportSearchIntent(getString(R.string.flight_origin));
+                final Intent airportSearchIntent = IntentFactory.getOriginSearchIntent(origin);
                 startActivityForResult(airportSearchIntent, REQUEST_ORIGIN_KEY);
             }
         });
@@ -91,7 +131,7 @@ public abstract class BaseTripFragment extends BaseAppFragment {
         inputDestination.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent airportSearchIntent = IntentFactory.getAirportSearchIntent(getString(R.string.flight_origin));
+                final Intent airportSearchIntent = IntentFactory.getDestinationSearchIntent(destination);
                 startActivityForResult(airportSearchIntent, REQUEST_DESTINATION_KEY);
             }
         });
@@ -121,9 +161,66 @@ public abstract class BaseTripFragment extends BaseAppFragment {
             @Override
             public void onClick(View v) {
                 if (isValid()) {
-
+                    searchFlights();
                 }
             }
         });
+    }
+
+    private void searchFlights() {
+        if (onSearchFlightEvent != null) {
+            onSearchFlightEvent.showLoader();
+        }
+        final SearchFlightItem searchFlightItem = new SearchFlightItem(origin.getAirportName(), origin.getAirportCode(), destination.getAirportName(), destination.getAirportCode(), inputDepart.getDate());
+        searchFlightItem.setReturnDate(getReturningDate());
+        searchFlightItem.setAdults(inputPassengers.getAdultCount());
+        searchFlightItem.setChildren(inputPassengers.getChildrenCount());
+        searchFlightItem.setInfants(inputPassengers.getInfantCount());
+        searchFlightItem.setNonstops(false);
+        searchFlightItem.setMaxPrice(-1);
+        searchFlightItem.setTravelClass(null);
+
+        tripViewModel.searchFlights(searchFlightItem)
+                .observe(this, new Observer<FlightItemResponse>() {
+                    @Override
+                    public void onChanged(@Nullable FlightItemResponse flightItemResponse) {
+                        if (onSearchFlightEvent != null) {
+                            onSearchFlightEvent.hideLoader();
+                        }
+                        if (flightItemResponse == null) {
+                            if (onSearchFlightEvent != null) {
+                                onSearchFlightEvent.showError();
+                            }
+                            return;
+                        }
+
+                        if (flightItemResponse.getError() != null || flightItemResponse.getFlightItem() == null || flightItemResponse.getFlightItem().getResults() == null) {
+                            if (onSearchFlightEvent != null) {
+                                onSearchFlightEvent.showError();
+                            }
+                        } else {
+                            final Intent intent = IntentFactory.getFlightResultIntent(flightItemResponse.getFlightItem(), searchFlightItem);
+                            startActivity(intent);
+                            resetValues();
+                        }
+                    }
+                });
+    }
+
+    protected void resetValues() {
+        inputOrigin.resetValues();
+        inputDestination.resetValues();
+        inputDepart.resetValues();
+        inputPassengers.resetValues();
+    }
+
+    public abstract Long getReturningDate();
+
+    public interface OnSearchFlightEvent {
+        void showLoader();
+
+        void hideLoader();
+
+        void showError();
     }
 }

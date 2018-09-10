@@ -5,27 +5,31 @@
     android:layout_height="wrap_content"
     android:gravity="center">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="0dp"
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/minus"
+        android:layout_width="@dimen/passenger_picker_button_width"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
-        tools:text="-" />
+        android:text="@string/select_passenger_minus" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:layout_width="0dp"
+        android:id="@+id/count"
+        android:layout_width="@dimen/passenger_picker_count_width"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
+        android:inputType="number"
         tools:text="1" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="0dp"
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/plus"
+        android:layout_width="@dimen/passenger_picker_button_width"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="?android:attr/selectableItemBackground"
         android:gravity="center"
-        tools:text="+" />
+        android:text="@string/select_passenger_plus" />
 
 </LinearLayout>

@@ -4,6 +4,7 @@
     <declare-styleable name="InputTextViewAttrs">
         <attr name="hint" format="string" />        <!-- This is the top hint -->
         <attr name="mainHint" format="string" />    <!-- This is the main hint -->
+        <attr name="colorText" format="color" />
         <attr name="colorInputError" format="color" />
         <attr name="colorInputNormal" format="color" />
         <attr name="inputType" format="enum">
@@ -11,6 +12,21 @@
             <enum name="date" value="1" />
             <enum name="number" value="2" />
         </attr>
+    </declare-styleable>
+
+    <declare-styleable name="PassengerPickerViewGroupAttrs">
+        <attr name="passengerType" format="string" />
+        <attr name="ageRange" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="EmptyScreenViewAttrs">
+        <attr name="iconVisibility" format="enum">
+            <enum name="INVISIBLE" value="0" />
+            <enum name="VISIBLE" value="1" />
+            <enum name="GONE" value="2" />
+        </attr>
+        <attr name="infoHeader" format="string" />
+        <attr name="infoSubHeader" format="string" />
     </declare-styleable>
 
 </resources>
