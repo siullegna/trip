@@ -83,6 +83,14 @@
     <string name="flight_result_type_format">&#160;+ %s</string>
 
     <string name="flight_filter">Sort &amp; Filter</string>
+    <string name="flight_filter_sort_by">Sort by</string>
+    <string name="flight_filter_duration_text">Flight duration</string>
+    <string name="flight_filter_stops">Stops</string>
+    <string name="flight_filter_nonstop">non-stop</string>
+    <string name="flight_filter_one_stop">1 stop</string>
+    <string name="flight_filter_two_plus_stops">2+ stops</string>
+    <string name="flight_filter_duration">%d hours</string>
+    <string name="flight_filter_duration_all">%d+ hours</string>
     <string name="flight_done">Done</string>
 
     <string name="flight_detail">Flight to %s</string>

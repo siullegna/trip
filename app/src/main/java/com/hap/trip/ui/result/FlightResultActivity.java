@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.hap.trip.R;
 import com.hap.trip.adapter.FlightAdapter;
+import com.hap.trip.model.filter.FilterItem;
 import com.hap.trip.model.flight.FlightData;
 import com.hap.trip.model.flight.FlightItem;
 import com.hap.trip.model.search.SearchFlightItem;
@@ -37,6 +38,9 @@ public class FlightResultActivity extends BaseAppActivity implements FlightHolde
     RecyclerView rvResults;
 
     private SearchFlightItem searchFlightItem;
+    private FlightItem flightItem;
+    private FilterItem filterItem = null;
+    private FlightAdapter flightAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,16 +49,23 @@ public class FlightResultActivity extends BaseAppActivity implements FlightHolde
 
         rvResults.setHasFixedSize(false);
         rvResults.setLayoutManager(new LinearLayoutManager(this));
-        final FlightAdapter flightAdapter = new FlightAdapter(this);
+        flightAdapter = new FlightAdapter(this);
         rvResults.setAdapter(flightAdapter);
 
         final Bundle args = getIntent().getExtras();
 
+        filterItem = getIntent().getParcelableExtra(FlightFilterActivity.ARG_FILTER_ITEM_KEY);
+
         if (args != null) {
-            final FlightItem flightItem = args.getParcelable(ARG_FLIGHTS_FOUND_KEY);
+            flightItem = args.getParcelable(ARG_FLIGHTS_FOUND_KEY);
             searchFlightItem = args.getParcelable(ARG_SEARCH_PARAMS_KEY);
             if (flightItem != null) {
-                final ArrayList<FlightData> flightDataList = FlightUtil.getFlightData(flightItem.getResults());
+                final ArrayList<FlightData> flightDataList;
+                if (filterItem == null) {
+                    flightDataList = FlightUtil.getFlightData(flightItem.getResults());
+                } else {
+                    flightDataList = FlightUtil.getFlightData(flightItem.getResults(), filterItem);
+                }
                 flightAdapter.addAll(flightDataList);
             }
         }
@@ -71,10 +82,16 @@ public class FlightResultActivity extends BaseAppActivity implements FlightHolde
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = IntentFactory.getFlightFilterIntent(searchFlightItem);
+                final Intent intent = IntentFactory.getFlightFilterIntent(filterItem);
                 startActivityForResult(intent, REQUEST_FILTER_CODE);
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(FlightFilterActivity.ARG_FILTER_ITEM_KEY, filterItem);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -82,6 +99,13 @@ public class FlightResultActivity extends BaseAppActivity implements FlightHolde
         switch (requestCode) {
             case REQUEST_FILTER_CODE:
                 // this will trigger the api call again with the new params
+                if (resultCode == RESULT_OK) {
+                    filterItem = data.getParcelableExtra(FlightFilterActivity.ARG_FILTER_ITEM_KEY);
+                    if (filterItem != null) {
+                        final ArrayList<FlightData> flightDataList = FlightUtil.getFlightData(flightItem.getResults(), filterItem);
+                        flightAdapter.addAll(flightDataList);
+                    }
+                }
                 break;
             case REQUEST_SAVE_FLIGHT_CODE:
                 if (resultCode == RESULT_OK) {

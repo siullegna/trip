@@ -14,5 +14,6 @@
     <string name="mock_from_to">From LAX to AGS</string>
     <string name="mock_adult">Adults</string>
     <string name="mock_age">&gt; 12 years</string>
+    <string name="mock_duration_hours">12 hours</string>
 
 </resources>

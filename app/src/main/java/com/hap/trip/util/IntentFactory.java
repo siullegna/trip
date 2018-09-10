@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.hap.trip.TripApplication;
+import com.hap.trip.model.filter.FilterItem;
 import com.hap.trip.model.flight.FlightData;
 import com.hap.trip.model.flight.FlightItem;
 import com.hap.trip.model.location.LocationAirportItem;
@@ -80,9 +81,9 @@ public class IntentFactory {
         return getIntent(FlightResultActivity.class, args);
     }
 
-    public static Intent getFlightFilterIntent(final SearchFlightItem searchFlightItem) {
+    public static Intent getFlightFilterIntent(final FilterItem filterItem) {
         final Bundle args = new Bundle();
-        args.putParcelable(FlightResultActivity.ARG_SEARCH_PARAMS_KEY, searchFlightItem);
+        args.putParcelable(FlightFilterActivity.ARG_FILTER_ITEM_KEY, filterItem);
         return getIntent(FlightFilterActivity.class, args);
     }
 

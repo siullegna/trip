@@ -21,9 +21,10 @@
     <dimen name="flight_detail_card_padding">16dp</dimen>
     <dimen name="flight_detail_card_view_height">0dp</dimen>
     <dimen name="flight_detail_button_margin">16dp</dimen>
-    <dimen name="flight_filter_card_padding">8dp</dimen>
+    <dimen name="flight_filter_card_margin">8dp</dimen>
     <dimen name="flight_filter_container_padding">8dp</dimen>
     <dimen name="flight_filter_icon_size">36dp</dimen>
+    <dimen name="flight_filter_sort_margin">8dp</dimen>
     <dimen name="my_flight_card_padding">16dp</dimen>
     <dimen name="flight_result_card_padding">8dp</dimen>
     <dimen name="flight_result_container_padding">8dp</dimen>

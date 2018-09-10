@@ -1,9 +1,11 @@
 package com.hap.trip.util;
 
 import android.content.res.Resources;
+import android.util.Log;
 
 import com.hap.trip.R;
 import com.hap.trip.TripApplication;
+import com.hap.trip.model.filter.FilterItem;
 import com.hap.trip.model.flight.Flight;
 import com.hap.trip.model.flight.FlightData;
 import com.hap.trip.model.flight.FlightResult;
@@ -15,10 +17,13 @@ import com.hap.trip.persistence.room.entity.FlightDetail;
 import com.hap.trip.widget.FlightCardView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.annotation.Nonnull;
 
 public class FlightUtil {
+    private static final String TAG = FlightUtil.class.getName();
+
     public static ArrayList<FlightData> getFlightData(final ArrayList<FlightResult> results) {
         final ArrayList<FlightData> flightDataList = new ArrayList<>();
 
@@ -26,6 +31,54 @@ public class FlightUtil {
             for (final Itinerarie itinerarie : result.getItineraries()) {
                 flightDataList.add(new FlightData(result.getFare(), itinerarie));
             }
+        }
+
+        return flightDataList;
+    }
+
+    public static ArrayList<FlightData> getFlightData(final ArrayList<FlightResult> results, final FilterItem filterItem) {
+        final ArrayList<FlightData> flightDataList = new ArrayList<>();
+
+        for (final FlightResult result : results) {
+            for (final Itinerarie itinerarie : result.getItineraries()) {
+                flightDataList.add(new FlightData(result.getFare(), itinerarie));
+            }
+        }
+
+        final ArrayList<FlightData> flightsToRemove = new ArrayList<>();
+        for (final FlightData flightData : flightDataList) {
+            final String durationParts[] = flightData.getItinerarie().getOutbound().getDuration().split(":");
+            try {
+                if (Integer.parseInt(durationParts[0]) > filterItem.getDurationHours() || (Integer.parseInt(durationParts[0]) == filterItem.getDurationHours() && Integer.parseInt(durationParts[1]) > 0)) {
+                    flightsToRemove.add(flightData);
+                } else if (filterItem.isNonStop()) {
+                    if (flightData.getItinerarie().getOutbound().getFlights().size() > 1) {
+                        flightsToRemove.add(flightData);
+                    }
+                } else if (filterItem.isOneStop()) {
+                    if (flightData.getItinerarie().getOutbound().getFlights().size() != 2) {
+                        flightsToRemove.add(flightData);
+                    }
+                } else if (filterItem.isTwoPlusStops()) {
+                    if (flightData.getItinerarie().getOutbound().getFlights().size() < 3) {
+                        flightsToRemove.add(flightData);
+                    }
+                }
+            } catch (NumberFormatException e) {
+                Log.d(TAG, e.getMessage());
+            }
+        }
+
+        flightDataList.removeAll(flightsToRemove);
+
+        // sort
+        switch (filterItem.getSortType()) {
+            case PRICE:
+                Collections.sort(flightDataList, new SortFlightByPrice());
+                break;
+            case AIRLINE:
+                Collections.sort(flightDataList, new SortFlightByAirline());
+                break;
         }
 
         return flightDataList;
@@ -40,7 +93,7 @@ public class FlightUtil {
         final Resources resources = TripApplication.getInstance().getResources();
 
         if (flights.size() > 1) {
-            stops = resources.getQuantityString(R.plurals.flight_result_stops, flights.size(), flights.size());
+            stops = resources.getQuantityString(R.plurals.flight_result_stops, flights.size(), flights.size() - 1);
         } else {
             stops = resources.getString(R.string.flight_result_nonstop);
         }

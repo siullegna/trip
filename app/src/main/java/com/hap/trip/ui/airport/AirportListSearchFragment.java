@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,6 +93,9 @@ public class AirportListSearchFragment extends BaseAirportFragment implements Ai
     }
 
     private void textChanged(final String airportTerm) {
+        if (TextUtils.isEmpty(airportTerm)) {
+            return;
+        }
         tripViewModel.searchAirport(airportTerm)
                 .observe(this, new Observer<AirportItemResponse>() {
                     @Override

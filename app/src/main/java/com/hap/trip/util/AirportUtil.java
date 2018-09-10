@@ -71,7 +71,7 @@ public class AirportUtil {
 
         // adding number_of_results
         url.append("&number_of_results=");
-        url.append(50);
+        url.append(5);
 
         return url.toString();
     }
