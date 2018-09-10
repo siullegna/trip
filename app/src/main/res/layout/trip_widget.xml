@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/trip_widget_header_padding">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_flights"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="@dimen/trip_widget_header_size" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/colorDivider" />
+
+    <ListView
+        android:id="@+id/lv_flights"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        tools:listitem="@layout/item_flight_simple_view" />
+
+    <RelativeLayout
+        android:id="@+id/empty_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingBottom="@dimen/error_screen_vertical_padding"
+        android:paddingEnd="@dimen/error_screen_horizontal_padding"
+        android:paddingLeft="@dimen/error_screen_horizontal_padding"
+        android:paddingRight="@dimen/error_screen_horizontal_padding"
+        android:paddingStart="@dimen/error_screen_horizontal_padding"
+        android:paddingTop="@dimen/error_screen_vertical_padding"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/info_header"
+            style="@style/errorHeaderStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info_icon"
+            android:layout_marginBottom="@dimen/error_icon_margin_bottom"
+            android:text="@string/widget_empty_header" />
+
+        <TextView
+            android:id="@+id/info_subheader"
+            style="@style/errorSubHeaderStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/info_header"
+            android:text="@string/widget_empty_sub_header" />
+
+    </RelativeLayout>
+
+</LinearLayout>

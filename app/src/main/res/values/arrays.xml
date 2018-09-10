@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="arr_sort_by">
+        <item>default</item>
+        <item>price</item>
+        <item>airline</item>
+    </string-array>
+
+</resources>

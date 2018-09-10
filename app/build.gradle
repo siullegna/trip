@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
+    flavorDimensions "default"
     defaultConfig {
         applicationId "com.hap.trip"
         minSdkVersion 15
@@ -9,11 +10,27 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField 'String', "TripApiKey", TripApiKey
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        free {
+            applicationIdSuffix '.free'
+        }
+        paid {
+            applicationIdSuffix '.paid'
         }
     }
 }
@@ -67,6 +84,6 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycleLibVersion"
 
     // Google Play Services
-    implementation 'com.google.android.gms:play-services-ads:15.0.1'
-    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    freeImplementation "com.google.android.gms:play-services-ads:$playServiceVersion"
+    implementation "com.google.android.gms:play-services-maps:$playServiceVersion"
 }

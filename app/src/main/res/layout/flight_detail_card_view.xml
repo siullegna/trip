@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_departing_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/flight_depart_from"
+            android:textColor="@color/colorPrimaryText" />
+
+        <LinearLayout
+            android:id="@+id/departing_from_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_returning_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/flight_detail_card_returning_margin"
+            android:text="@string/flight_return_from"
+            android:textColor="@color/colorPrimaryText" />
+
+        <LinearLayout
+            android:id="@+id/returning_from_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

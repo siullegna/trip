@@ -33,6 +33,7 @@ allprojects {
         roomLibVersion          = '1.1.0'
         lifecycleLibVersion     = '1.1.1'
         frescoLibVersion        = '1.9.0'
+        playServiceVersion      = '15.0.1'
     }
 }
 

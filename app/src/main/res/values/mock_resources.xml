@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="mock_detail_card_view_height">0dp</dimen>
+
+
+    <string name="mock_price">$460</string>
+    <string name="mock_flight_time">10:20 &#8211; 13:25</string>
+    <string name="mock_airline">AeroMexico</string>
+    <string name="mock_duration">5 h 14m (1 stop)</string>
+    <string name="mock_class_type">Economy</string>
+    <string name="mock_flight_number">Flight Number</string>
+    <string name="mock_date">September 1, 2018</string>
+    <string name="mock_from_to">From LAX to AGS</string>
+    <string name="mock_adult">Adults</string>
+    <string name="mock_age">&gt; 12 years</string>
+    <string name="mock_duration_hours">12 hours</string>
+
+</resources>

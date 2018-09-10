@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/minus"
+        android:layout_width="@dimen/passenger_picker_button_width"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:text="@string/select_passenger_minus" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/count"
+        android:layout_width="@dimen/passenger_picker_count_width"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:inputType="number"
+        tools:text="1" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/plus"
+        android:layout_width="@dimen/passenger_picker_button_width"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:text="@string/select_passenger_plus" />
+
+</LinearLayout>
